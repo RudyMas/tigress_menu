@@ -4,11 +4,12 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 250px;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
     grid-template-areas:
-        "nav nav"
-        "main-content sidebar-right ";
+        "header"
+        "main-content"
+        "nav";
     height: 100vh;
 }
 
