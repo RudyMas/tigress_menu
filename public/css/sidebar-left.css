@@ -1,0 +1,100 @@
+.sidebar-left {
+    grid-area: sidebar-left;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+}
+
+.sidebar-left ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-left li {
+    margin-bottom: 10px;
+}
+
+.sidebar-left .menu-item {
+    background-color: #666;
+    color: white;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar-left .menu-item:hover {
+    background-color: #444;
+}
+
+.sidebar-left .menu-item.active {
+    background-color: darkgreen;
+    color: white;
+}
+
+.sidebar-left .submenu {
+    display: none;
+    margin-left: 15px;
+}
+
+.sidebar-left .submenu.active {
+    display: block;
+}
+
+.sidebar-left .submenu li {
+    width: 100%;
+    background-color: #666;
+    margin-bottom: 0;
+}
+
+.sidebar-left .submenu li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+.sidebar-left .submenu li a:hover {
+    background-color: #444;
+}
+
+.sidebar-left .submenu li a.active {
+    background-color: darkgreen;
+    color: white;
+}
+
+.sidebar-left .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.sidebar-left .back-button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sidebar-left .back-button:hover {
+    background-color: #444;
+}
+
+.main-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.main-content h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 1.2em;
+}

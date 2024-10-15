@@ -1,0 +1,86 @@
+.sidebar-right {
+    grid-area: sidebar-right;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+}
+
+.sidebar-right ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-right li {
+    margin-bottom: 10px;
+}
+
+.sidebar-right .menu-item {
+    background-color: #666;
+    color: white;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar-right .menu-item:hover {
+    background-color: #444;
+}
+
+.sidebar-right .menu-item.active {
+    background-color: darkgreen;
+    color: white;
+}
+
+.sidebar-right .submenu {
+    display: none;
+    margin-left: 15px;
+}
+
+.sidebar-right .submenu.active {
+    display: block;
+}
+
+.sidebar-right .submenu li {
+    width: 100%;
+    background-color: #666;
+    margin-bottom: 0;
+}
+
+.sidebar-right .submenu li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+.sidebar-right .submenu li a:hover {
+    background-color: #444;
+}
+
+.sidebar-right .submenu li a.active {
+    background-color: darkgreen;
+    color: white;
+}
+
+.sidebar-right .sidebar-footer {
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.sidebar-right .back-button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sidebar-right .back-button:hover {
+    background-color: #444;
+}
