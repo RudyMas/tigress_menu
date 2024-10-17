@@ -7,7 +7,7 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 1.2.0
+ * @version 1.2.1
  * @lastmodified 2024-10-17
  * @package Tigress\Menu
  */
@@ -149,7 +149,7 @@ class Sidebar extends Menu
      */
     public function addBackButton($menuItemValue): void
     {
-        $this->output .= '<li><button class="back-button" onclick="goBack(\'{{ BASE_URL }}/home\')">Terug</button></li>';
+        $this->output .= '<li><button class="back-button" onclick="goBack(\'' . BASE_URL . '/home\')">Terug</button></li>';
     }
 
     /**
@@ -160,6 +160,6 @@ class Sidebar extends Menu
      */
     public function addMenuLink($childItemValue): void
     {
-        $this->output .= '<li><a href="{{ BASE_URL }}' . $childItemValue['path'] . '"><i class="fa fa-' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
+        $this->output .= '<li><a href="' . BASE_URL . $childItemValue['path'] . '"><i class="fa fa-' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
     }
 }
