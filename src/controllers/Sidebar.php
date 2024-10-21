@@ -7,8 +7,8 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 1.2.1
- * @lastmodified 2024-10-17
+ * @version 1.2.2
+ * @lastmodified 2024-10-21
  * @package Tigress\Menu
  */
 class Sidebar extends Menu
@@ -149,7 +149,9 @@ class Sidebar extends Menu
      */
     public function addBackButton($menuItemValue): void
     {
-        $this->output .= '<li><button class="back-button" onclick="goBack(\'' . BASE_URL . '/home\')">Terug</button></li>';
+        $text = $menuItemValue['title'] ?? 'Back';
+        $align = $menuItemValue['align'] ?? 'left';
+        $this->output .= '<li><button class="back-button" style="text-align: ' . $align . '" onclick="goBack(\'' . BASE_URL . $menuItemValue['path'] . '\')">' . $text . '</button></li>';
     }
 
     /**
