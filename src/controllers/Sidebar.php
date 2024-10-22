@@ -7,8 +7,8 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 1.2.2
- * @lastmodified 2024-10-21
+ * @version 1.2.3
+ * @lastmodified 2024-10-22
  * @package Tigress\Menu
  */
 class Sidebar extends Menu
@@ -162,6 +162,6 @@ class Sidebar extends Menu
      */
     public function addMenuLink($childItemValue): void
     {
-        $this->output .= '<li><a href="' . BASE_URL . $childItemValue['path'] . '"><i class="fa fa-' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
+        $this->output .= '<li><a href="' . BASE_URL . $childItemValue['path'] . '"><i class="' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
     }
 }
