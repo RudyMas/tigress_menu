@@ -84,17 +84,3 @@
 .sidebar-left .back-button:hover {
     background-color: #444;
 }
-
-.main-content {
-    padding: 20px;
-    background-color: #f9f9f9;
-}
-
-.main-content h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
-
-.main-content p {
-    font-size: 1.2em;
-}
