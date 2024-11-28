@@ -3,12 +3,12 @@
 namespace Controller;
 
 /**
- * Class Tiles (PHP version 8.3)
+ * Class Tiles (PHP version 8.4)
+ *
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 1.0.0
- * @lastmodified 2024-11-04
+ * @version 2024.11.28.0
  * @package Tigress\Menu
  */
 class Tiles extends Menu
@@ -33,9 +33,14 @@ class Tiles extends Menu
         return $output;
     }
 
-    private function buildTilesWithSidebar()
+    /**
+     * Build the tiles with sidebar
+     *
+     * @return string
+     */
+    private function buildTilesWithSidebar(): string
     {
-        return '<p>test van HTML tiles met sidebar.</p>';
+        return '<p>Not yet implemented!</p>';
     }
 
     /**

@@ -3,12 +3,12 @@
 namespace Controller;
 
 /**
- * Class Sidebar (PHP version 8.3)
+ * Class Sidebar (PHP version 8.4)
+ *
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 1.2.3
- * @lastmodified 2024-10-22
+ * @version 2024.11.28.0
  * @package Tigress\Menu
  */
 class Sidebar extends Menu
@@ -41,11 +41,11 @@ class Sidebar extends Menu
     public function addSidebarLeft($menuSidebarValue): void
     {
         $this->output .= '<div class="sidebar-left">';
-        foreach ($menuSidebarValue as $menuPositionKey => $menuPostionValue) {
+        foreach ($menuSidebarValue as $menuPositionKey => $menuPositionValue) {
             if ($menuPositionKey === 'top') {
-                $this->addSidebarTop($menuPostionValue);
+                $this->addSidebarTop($menuPositionValue);
             } elseif ($menuPositionKey === 'bottom') {
-                $this->addSidebarBottom($menuPostionValue);
+                $this->addSidebarBottom($menuPositionValue);
             }
         }
         $this->output .= '</div>';
@@ -60,11 +60,11 @@ class Sidebar extends Menu
     public function addSidebarRight($menuSidebarValue): void
     {
         $this->output .= '<div class="sidebar-right">';
-        foreach ($menuSidebarValue as $menuPositionKey => $menuPostionValue) {
+        foreach ($menuSidebarValue as $menuPositionKey => $menuPositionValue) {
             if ($menuPositionKey === 'top') {
-                $this->addSidebarTop($menuPostionValue);
+                $this->addSidebarTop($menuPositionValue);
             } elseif ($menuPositionKey === 'bottom') {
-                $this->addSidebarBottom($menuPostionValue);
+                $this->addSidebarBottom($menuPositionValue);
             }
         }
         $this->output .= '</div>';

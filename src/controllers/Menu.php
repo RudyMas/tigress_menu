@@ -5,12 +5,12 @@ namespace Controller;
 use Twig\Error\LoaderError;
 
 /**
- * Class Menu (PHP version 8.3)
+ * Class Menu (PHP version 8.4)
+ *
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 0.3.0
- * @lastmodified 2024-11-04
+ * @version 2024.11.28.0
  * @package Tigress\Menu
  */
 class Menu
@@ -40,7 +40,7 @@ class Menu
      */
     public static function version(): string
     {
-        return '0.3.0';
+        return '2024.11.28';
     }
 
     /**
