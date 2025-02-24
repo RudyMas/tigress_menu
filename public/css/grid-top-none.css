@@ -10,7 +10,7 @@
         "nav"
         "main-content"
         "footer";
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {
@@ -27,6 +27,7 @@ footer {
     display: flex;
     justify-content: space-between;
     margin: 0;
+    position: sticky;
 }
 
 .main-content h1 {

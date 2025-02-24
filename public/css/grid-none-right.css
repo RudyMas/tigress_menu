@@ -10,7 +10,7 @@
         "header header"
         "main-content sidebar-right"
         "footer footer";
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {

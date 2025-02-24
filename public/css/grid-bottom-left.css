@@ -10,7 +10,7 @@
         "header header"
         "sidebar-left main-content"
         "nav nav";
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {
