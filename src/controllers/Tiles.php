@@ -8,7 +8,7 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2025.03.03.0
+ * @version 2025.03.03.1
  * @package Tigress\Menu
  */
 class Tiles extends Menu
@@ -53,8 +53,11 @@ class Tiles extends Menu
         $output = '<div class="home-tiles">';
         $output .= "<div class='row'>";
         foreach ($this->menu as $mainKey => $mainValue) {
+            $text_align = $mainValue['align'] ?? 'left';
+            $backgroundColor = $mainValue['backgroundColor'] ?? '';
+            $color =  $mainValue['color'] ?? '';
             $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
-            $output .= "<h5 class='Start'>{$mainKey}</h5>";
+            $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
             foreach ($mainValue['children'] as $key => $value) {
                 if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
                     $output .= $this->createTile($key, $value);
