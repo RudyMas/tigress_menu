@@ -1,9 +1,9 @@
+/* Version: 2025.05.22 */
 .home-tiles {
     position: relative;
     height: 100%;
     width: 80%;
     margin: 0 auto;
-    overflow: hidden;
 
     .Start {
         color: #DBDBDB;
@@ -24,6 +24,8 @@
 
     div[class^="btn"]:hover {
         border-color: white;
+        box-shadow: 0 0 16px 8px currentColor, 0 0 4px 8px lightblue;
+        transition: all 2s ease;
     }
 
     div[class^="btn"]:hover .label {
