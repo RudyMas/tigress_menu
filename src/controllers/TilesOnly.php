@@ -8,12 +8,12 @@ use Tigress\Core;
  * Class Tiles (PHP version 8.4)
  *
  * @author Rudy Mas <rudy.mas@rudymas.be>
- * @copyright 2024-2025 Rudy Mas (https://rudymas.be)
+ * @copyright 2025 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
  * @version 2025.09.22.0
  * @package Tigress\Menu
  */
-class Tiles extends Menu
+class TilesOnly extends Menu
 {
     /**
      * Create the tiles
@@ -56,23 +56,17 @@ class Tiles extends Menu
      */
     private function buildTiles(): string
     {
-        $output = '<div class="home-tiles">';
+        $output = '<div class="only-tiles">';
         $output .= "<div class='row'>";
-        foreach ($this->menu as $mainKey => $mainValue) {
-            $text_align = $mainValue['align'] ?? 'left';
-            $backgroundColor = $mainValue['backgroundColor'] ?? '';
-            $color = $mainValue['color'] ?? '';
-            $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
-            $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
-            foreach ($mainValue['children'] as $key => $value) {
-                if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
-                    $output .= $this->createTile($key, $value);
-                } else {
-                    $output .= $this->createGreyTile($key, $value);
-                }
+        $output .= "<div class='col-sm-12'>";
+        foreach ($this->menu['tiles'] as $key => $value) {
+            if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
+                $output .= $this->createTile($key, $value);
+            } else {
+                $output .= $this->createGreyTile($key, $value);
             }
-            $output .= "</div>";
         }
+        $output .= "</div>";
         $output .= "</div>";
         $output .= "</div>";
 

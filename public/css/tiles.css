@@ -4,78 +4,88 @@
     height: 100%;
     width: 80%;
     margin: 0 auto;
-
-    .Start {
-        color: #DBDBDB;
-        margin-bottom: 20px;
-        margin-top: 20px;
-    }
-
-    div[class^="btn"] {
-        float: left;
-        margin: 0 10px 10px 0;
-        height: 80px;
-        position: relative;
-        cursor: pointer;
-        transition: all .4s ease;
-        text-align: center;
-        line-height: 70px;
-    }
-
-    div[class^="btn"]:hover {
-        border-color: white;
-        box-shadow: 0 0 16px 8px currentColor, 0 0 4px 8px lightblue;
-        transition: all 2s ease;
-    }
-
-    div[class^="btn"]:hover .label {
-        color: white;
-    }
-
-    div[class^="btn"]:hover i {
-        color: white;
-    }
-
-    div[class^="btn"]:active {
-        transform: scale(.95, .95);
-    }
-
-    .btn-big {
-        width: 100%;
-        max-width: 200px;
-    }
-
-    .btn-small {
-        width: 47%;
-        max-width: 95px;
-    }
-
-    .label {
-        position: absolute;
-        bottom: 5px;
-        left: 5px;
-        color: white;
-        font: 500 12px "Segoe UI";
-        font-weight: bold;
-    }
-
-    .labelNotificatie {
-        position: absolute;
-        top: -10px;
-        right: 0px;
-        color: white;
-        font: 500 14px "Segoe UI";
-        font-weight: bold;
-    }
-
-    .file-text {
-        margin-top: .2em;
-    }
-
-    .fa-stack i {
-        color: red;
-    }
 }
+
+.only-tiles {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.Start {
+    color: #DBDBDB;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+div[class^="btn"] {
+    float: left;
+    margin: 0 10px 10px 0;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+    transition: all .4s ease;
+    text-align: center;
+    line-height: 70px;
+}
+
+div[class^="btn"]:hover {
+    border-color: white;
+    box-shadow: 0 0 16px 8px currentColor, 0 0 4px 8px lightblue;
+    transition: all 2s ease;
+}
+
+div[class^="btn"]:hover .label {
+    color: white;
+}
+
+div[class^="btn"]:hover i {
+    color: white;
+}
+
+div[class^="btn"]:active {
+    transform: scale(.95, .95);
+}
+
+.btn-big {
+    width: 100%;
+    max-width: 200px;
+    overflow: hidden;
+}
+
+.btn-small {
+    width: 47%;
+    max-width: 95px;
+    overflow: hidden;
+}
+
+.label {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+    font: 500 12px "Segoe UI";
+    font-weight: bold;
+}
+
+.labelNotificatie {
+    position: absolute;
+    top: -10px;
+    right: 0;
+    color: white;
+    font: 500 14px "Segoe UI";
+    font-weight: bold;
+}
+
+.file-text {
+    margin-top: .2em;
+}
+
+.fa-stack i {
+    color: red;
+}
+
 
 @media screen and (max-width: 768px) {
     .home-tiles {
