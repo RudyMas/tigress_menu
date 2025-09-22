@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Tigress\Core;
-
 /**
  * Class Tiles (PHP version 8.4)
  *
