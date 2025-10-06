@@ -6,9 +6,9 @@ namespace Controller;
  * Class Sidebar (PHP version 8.4)
  *
  * @author Rudy Mas <rudy.mas@rudymas.be>
- * @copyright 2024 Rudy Mas (https://rudymas.be)
+ * @copyright 2024-2025 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2024.11.28.0
+ * @version 2025.10.06.0
  * @package Tigress\Menu
  */
 class Sidebar extends Menu
@@ -17,11 +17,22 @@ class Sidebar extends Menu
      * Create the sidebar
      *
      * @param string $jsonFile
+     * @param string|null $jsonFolder
      * @return void
      */
-    public function createSidebar(string $jsonFile): void
+    public function createSidebar(string $jsonFile, ?string $jsonFolder = null): void
     {
-        $this->menu = json_decode(file_get_contents(SYSTEM_ROOT . '/src/menus/' . $jsonFile), true);
+        if ($jsonFolder === null) {
+            $this->menu = json_decode(file_get_contents(SYSTEM_ROOT . '/src/menus/' . $jsonFile), true);
+        } else {
+            if (!str_starts_with($jsonFolder, '/')) {
+                $jsonFolder = '/' . $jsonFolder;
+            }
+            if (!str_ends_with($jsonFolder, '/')) {
+                $jsonFolder .= '/';
+            }
+            $this->menu = json_decode(file_get_contents(SYSTEM_ROOT . $jsonFolder . $jsonFile), true);
+        }
 
         if (isset($this->menu['left'])) {
             $this->addSidebarLeft($this->menu['left']);
@@ -106,11 +117,19 @@ class Sidebar extends Menu
     {
         foreach ($menuPositionValue as $menuItemValue) {
             if (isset($menuItemValue['type'])) {
-                if ($menuItemValue['type'] === 'menu-item') {
-                    $this->addMenuItem($menuItemValue);
-                }
-                if ($menuItemValue['type'] === 'back-button') {
-                    $this->addBackButton($menuItemValue);
+                switch ($menuItemValue['type']) {
+                    case 'menu-item':
+                        $this->addMenuItem($menuItemValue);
+                        break;
+                    case 'menu-link':
+                        $this->addMenuLink($menuItemValue);
+                        break;
+                    case 'back-button':
+                        $this->addBackButton($menuItemValue);
+                        break;
+                    default:
+                        // Unknown type, you can log this if needed
+                        break;
                 }
             }
         }
@@ -133,7 +152,7 @@ class Sidebar extends Menu
         foreach ($menuItemValue['children'] as $childItemValue) {
             if (isset($childItemValue['type'])) {
                 if ($childItemValue['type'] === 'link') {
-                    $this->addMenuLink($childItemValue);
+                    $this->addSubmenuLink($childItemValue);
                 }
             }
         }
@@ -157,10 +176,21 @@ class Sidebar extends Menu
     /**
      * Add the menu link
      *
+     * @param $menuItemValue
+     * @return void
+     */
+    public function addMenuLink($menuItemValue): void
+    {
+        $this->output .= '<li><span class="menu-link"><a href="' . BASE_URL . $menuItemValue['path'] . '"><i class="' . $menuItemValue['icon'] . '"></i> ' . $menuItemValue['title'] . '</a></span></li>';
+    }
+
+    /**
+     * Add the submenu link
+     *
      * @param $childItemValue
      * @return void
      */
-    public function addMenuLink($childItemValue): void
+    public function addSubmenuLink($childItemValue): void
     {
         $this->output .= '<li><a href="' . BASE_URL . $childItemValue['path'] . '"><i class="' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
     }

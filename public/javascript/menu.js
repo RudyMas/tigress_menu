@@ -13,10 +13,10 @@ function setActiveMenu() {
     const currentUrl = window.location.pathname;
 
     // Get all the sidebar left
-    const menuLeft = document.querySelectorAll('.sidebar-left .submenu li a');
+    const menuLeftSubmenu = document.querySelectorAll('.sidebar-left .submenu li a');
 
     // Loop through all the links in the sidebar
-    menuLeft.forEach(link => {
+    menuLeftSubmenu.forEach(link => {
         // Check if the link's href matches the current URL
         if (link.getAttribute('href') === currentUrl) {
             // Add active class to the matching link
@@ -36,10 +36,19 @@ function setActiveMenu() {
         }
     });
 
-    const menuRight = document.querySelectorAll('.sidebar-right .submenu li a');
+    const menuLeftMenulinks = document.querySelectorAll('.sidebar-left .menu-link a');
+
+    menuLeftMenulinks.forEach(link => {
+        if (link.getAttribute('href') === currentUrl) {
+            link.classList.add('active');
+        }
+    });
+
+    // Get all the sidebar right
+    const menuRightSubmenu = document.querySelectorAll('.sidebar-right .submenu li a');
 
     // Loop through all the links in the sidebar
-    menuRight.forEach(link => {
+    menuRightSubmenu.forEach(link => {
         // Check if the link's href matches the current URL
         if (link.getAttribute('href') === currentUrl) {
             // Add active class to the matching link
@@ -56,6 +65,14 @@ function setActiveMenu() {
             if (sectionButton) {
                 sectionButton.classList.add('active');
             }
+        }
+    });
+
+    const menuRightMenulinks = document.querySelectorAll('.sidebar-right .menu-link a');
+
+    menuRightMenulinks.forEach(link => {
+        if (link.getAttribute('href') === currentUrl) {
+            link.classList.add('active');
         }
     });
 }

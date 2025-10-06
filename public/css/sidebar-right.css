@@ -34,6 +34,33 @@
     color: white;
 }
 
+.sidebar-right .menu-link {
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar-right .menu-link a {
+    background-color: #666;
+    text-decoration: none;
+    color: white;
+    display: block;
+    width: 100%;
+    padding: 10px;
+}
+
+.sidebar-right .menu-link a:hover {
+    background-color: #444;
+}
+
+.sidebar-right .menu-link a.active {
+    background-color: darkgreen;
+    color: white;
+}
+
+.sidebar-right .menu-link a.active:hover {
+    background-color: #444;
+}
+
 .sidebar-right .submenu {
     display: none;
     margin-left: 15px;
