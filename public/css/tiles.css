@@ -58,6 +58,7 @@ div[class^="btn"]:active {
     width: 47%;
     max-width: 95px;
     overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .label {
