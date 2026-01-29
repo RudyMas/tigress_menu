@@ -3,12 +3,12 @@
 namespace Controller;
 
 /**
- * Class Tiles (PHP version 8.4)
+ * Class Tiles (PHP version 8.5)
  *
  * @author Rudy Mas <rudy.mas@rudymas.be>
- * @copyright 2024-2025 Rudy Mas (https://rudymas.be)
+ * @copyright 2024-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2025.09.22.0
+ * @version 2026.01.29.0
  * @package Tigress\Menu
  */
 class Tiles extends Menu
@@ -57,19 +57,24 @@ class Tiles extends Menu
         $output = '<div class="home-tiles">';
         $output .= "<div class='row'>";
         foreach ($this->menu as $mainKey => $mainValue) {
-            $text_align = $mainValue['align'] ?? 'left';
-            $backgroundColor = $mainValue['backgroundColor'] ?? '';
-            $color = $mainValue['color'] ?? '';
-            $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
-            $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
-            foreach ($mainValue['children'] as $key => $value) {
-                if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
-                    $output .= $this->createTile($key, $value);
-                } else {
-                    $output .= $this->createGreyTile($key, $value);
+            $level = $mainValue['level'] ?? null;
+            $minLevel = $mainValue['min-level'] ?? $level ?? 1;
+            $maxLevel = $mainValue['max-level'] ?? $level ?? 9999;
+            if ($minLevel <= $_SESSION['user']['access_level'] && $_SESSION['user']['access_level'] <= $maxLevel) {
+                $text_align = $mainValue['align'] ?? 'left';
+                $backgroundColor = $mainValue['backgroundColor'] ?? '';
+                $color = $mainValue['color'] ?? '';
+                $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
+                $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
+                foreach ($mainValue['children'] as $key => $value) {
+                    if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
+                        $output .= $this->createTile($key, $value);
+                    } else {
+                        $output .= $this->createGreyTile($key, $value);
+                    }
                 }
+                $output .= "</div>";
             }
-            $output .= "</div>";
         }
         $output .= "</div>";
         $output .= "</div>";
