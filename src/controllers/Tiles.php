@@ -8,7 +8,7 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.01.29.1
+ * @version 2026.02.23.0
  * @package Tigress\Menu
  */
 class Tiles extends Menu
@@ -18,9 +18,10 @@ class Tiles extends Menu
      *
      * @param string|array $jsonFileOrArray
      * @param bool $withSidebar
+     * @param bool $showInfo
      * @return string
      */
-    public function createTiles(string|array $jsonFileOrArray, bool $withSidebar = false): string
+    public function createTiles(string|array $jsonFileOrArray, bool $withSidebar = false, bool $showInfo = false): string
     {
         if (file_exists(SYSTEM_ROOT . '/src/menus/' . $jsonFileOrArray)) {
             $this->menu = json_decode(file_get_contents(SYSTEM_ROOT . '/src/menus/' . $jsonFileOrArray), true);
@@ -29,9 +30,9 @@ class Tiles extends Menu
         }
 
         if ($withSidebar === true) {
-            $output = $this->buildTilesWithSidebar();
+            $output = $this->buildTilesWithSidebar($showInfo);
         } else {
-            $output = $this->buildTiles();
+            $output = $this->buildTiles($showInfo);
         }
 
         return $output;
@@ -40,9 +41,10 @@ class Tiles extends Menu
     /**
      * Build the tiles with sidebar
      *
+     * @param bool $showInfo
      * @return string
      */
-    private function buildTilesWithSidebar(): string
+    private function buildTilesWithSidebar(bool $showInfo = false): string
     {
         return '<p>Not yet implemented!</p>';
     }
@@ -50,9 +52,10 @@ class Tiles extends Menu
     /**
      * Build the tiles
      *
+     * @param bool $showInfo
      * @return string
      */
-    private function buildTiles(): string
+    private function buildTiles(bool $showInfo = false): string
     {
         $userAccessLevel = $_SESSION['user']['access_level'] ?? 1;
         $output = '<div class="home-tiles">';
@@ -73,9 +76,9 @@ class Tiles extends Menu
                     $tileMaxLevel = $value['max-level'] ?? $tileLevel ?? 9999;
                     if ($tileMinLevel <= $userAccessLevel && $userAccessLevel <= $tileMaxLevel) {
                         if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
-                            $output .= $this->createTile($key, $value);
+                            $output .= $this->createTile($key, $value, $showInfo);
                         } else {
-                            $output .= $this->createGreyTile($key, $value);
+                            $output .= $this->createGreyTile($key, $value, $showInfo);
                         }
                     }
                 }
@@ -93,12 +96,17 @@ class Tiles extends Menu
      *
      * @param string $key
      * @param array $value
+     * @param bool $showInfo
      * @return string
      */
-    private function createTile(string $key, array $value): string
+    private function createTile(string $key, array $value, bool $showInfo = false): string
     {
         $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden'>";
-        $output .= "<div class='{$value['button']} {$value['buttonColorClass']}'>";
+        if ($showInfo === true && !empty($value['info'])) {
+            $output .= "<div class='{$value['button']} {$value['buttonColorClass']}' title='{$value['info']}' data-toggle='tooltip'>";
+        } else {
+            $output .= "<div class='{$value['button']} {$value['buttonColorClass']}'>";
+        }
         $output .= "<i class='{$value['icon']} fa-2x' style='color: {$value['iconColor']}'></i>";
         $output .= "<span class='label'>{$key}</span>";
         $output .= '</div>';
