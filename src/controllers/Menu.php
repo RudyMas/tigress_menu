@@ -10,7 +10,7 @@ use Twig\Error\LoaderError;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.01.29.0
+ * @version 2026.03.09.0
  * @package Tigress\Menu
  */
 class Menu
@@ -40,7 +40,7 @@ class Menu
      */
     public static function version(): string
     {
-        return '2026.01.29';
+        return '2026.03.09';
     }
 
     /**

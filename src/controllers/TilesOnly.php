@@ -8,10 +8,10 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2025-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.02.24.0
+ * @version 2026.03.09.0
  * @package Tigress\Menu
  */
-class TilesOnly extends Menu
+class TilesOnly extends Tiles
 {
     /**
      * Create the tiles
@@ -39,16 +39,6 @@ class TilesOnly extends Menu
     }
 
     /**
-     * Build the tiles with sidebar
-     *
-     * @return string
-     */
-    private function buildTilesWithSidebar(): string
-    {
-        return '<p>Not yet implemented!</p>';
-    }
-
-    /**
      * Build the tiles
      *
      * @param bool $showInfo
@@ -63,7 +53,7 @@ class TilesOnly extends Menu
             if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
                 $output .= $this->createTile($key, $value, $showInfo);
             } else {
-                $output .= $this->createGreyTile($key, $value, $showInfo);
+                $output .= $this->createGrayTile($key, $value, $showInfo);
             }
         }
         $output .= "</div>";
@@ -74,43 +64,12 @@ class TilesOnly extends Menu
     }
 
     /**
-     * Create a tile
+     * Build the tiles with sidebar
      *
-     * @param string $key
-     * @param array $value
-     * @param bool $showInfo
      * @return string
      */
-    private function createTile(string $key, array $value, bool $showInfo = false): string
+    private function buildTilesWithSidebar(): string
     {
-        $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden'>";
-        if ($showInfo === true && !empty($value['info'])) {
-            $output .= "<div class='{$value['button']} {$value['buttonColorClass']}' title='{$value['info']}' data-toggle='tooltip'>";
-        } else {
-            $output .= "<div class='{$value['button']} {$value['buttonColorClass']}'>";
-        }
-        $output .= "<i class='{$value['icon']} fa-2x' style='color: {$value['iconColor']}'></i>";
-        $output .= "<span class='label'>{$key}</span>";
-        $output .= '</div>';
-        $output .= '</a>';
-        return $output;
-    }
-
-    /**
-     * Create a grey tile
-     *
-     * @param string $key
-     * @param array $value
-     * @return string
-     */
-    private function createGreyTile(string $key, array $value): string
-    {
-        $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden; pointer-events: none; cursor: default'>";
-        $output .= "<div class='{$value['button']} grey'>";
-        $output .= "<i class='{$value['icon']} fa-2x' style='color: {$value['iconColor']}'></i>";
-        $output .= "<span class='label'>{$key}</span>";
-        $output .= '</div>';
-        $output .= '</a>';
-        return $output;
+        return '<p>Not yet implemented!</p>';
     }
 }

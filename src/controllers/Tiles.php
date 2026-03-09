@@ -8,7 +8,7 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.02.23.0
+ * @version 2026.03.09.0
  * @package Tigress\Menu
  */
 class Tiles extends Menu
@@ -39,55 +39,20 @@ class Tiles extends Menu
     }
 
     /**
-     * Build the tiles with sidebar
+     * Create a gray tile
      *
-     * @param bool $showInfo
+     * @param string $key
+     * @param array $value
      * @return string
      */
-    private function buildTilesWithSidebar(bool $showInfo = false): string
+    protected function createGrayTile(string $key, array $value): string
     {
-        return '<p>Not yet implemented!</p>';
-    }
-
-    /**
-     * Build the tiles
-     *
-     * @param bool $showInfo
-     * @return string
-     */
-    private function buildTiles(bool $showInfo = false): string
-    {
-        $userAccessLevel = $_SESSION['user']['access_level'] ?? 1;
-        $output = '<div class="home-tiles">';
-        $output .= "<div class='row'>";
-        foreach ($this->menu as $mainKey => $mainValue) {
-            $level = $mainValue['level'] ?? null;
-            $minLevel = $mainValue['min-level'] ?? $level ?? 1;
-            $maxLevel = $mainValue['max-level'] ?? $level ?? 9999;
-            if ($minLevel <= $userAccessLevel && $userAccessLevel <= $maxLevel) {
-                $text_align = $mainValue['align'] ?? 'left';
-                $backgroundColor = $mainValue['backgroundColor'] ?? '';
-                $color = $mainValue['color'] ?? '';
-                $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
-                $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
-                foreach ($mainValue['children'] as $key => $value) {
-                    $tileLevel = $value['level'] ?? null;
-                    $tileMinLevel = $value['min-level'] ?? $tileLevel ?? 1;
-                    $tileMaxLevel = $value['max-level'] ?? $tileLevel ?? 9999;
-                    if ($tileMinLevel <= $userAccessLevel && $userAccessLevel <= $tileMaxLevel) {
-                        if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
-                            $output .= $this->createTile($key, $value, $showInfo);
-                        } else {
-                            $output .= $this->createGreyTile($key, $value, $showInfo);
-                        }
-                    }
-                }
-                $output .= "</div>";
-            }
-        }
-        $output .= "</div>";
-        $output .= "</div>";
-
+        $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden; pointer-events: none; cursor: default'>";
+        $output .= "<div class='{$value['button']} grey'>";
+        $output .= "<i class='{$value['icon']} fa-2x' style='color: {$value['iconColor']}'></i>";
+        $output .= "<span class='label'>{$key}</span>";
+        $output .= '</div>';
+        $output .= '</a>';
         return $output;
     }
 
@@ -99,7 +64,7 @@ class Tiles extends Menu
      * @param bool $showInfo
      * @return string
      */
-    private function createTile(string $key, array $value, bool $showInfo = false): string
+    protected function createTile(string $key, array $value, bool $showInfo = false): string
     {
         $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden'>";
         if ($showInfo === true && !empty($value['info'])) {
@@ -115,20 +80,74 @@ class Tiles extends Menu
     }
 
     /**
-     * Create a grey tile
+     * Build the tiles
      *
-     * @param string $key
-     * @param array $value
+     * @param bool $showInfo
      * @return string
      */
-    private function createGreyTile(string $key, array $value): string
+    private function buildTiles(bool $showInfo = false): string
     {
-        $output = "<a href='{$value['url']}' target='{$value['target']}' style='overflow: hidden; pointer-events: none; cursor: default'>";
-        $output .= "<div class='{$value['button']} grey'>";
-        $output .= "<i class='{$value['icon']} fa-2x' style='color: {$value['iconColor']}'></i>";
-        $output .= "<span class='label'>{$key}</span>";
-        $output .= '</div>';
-        $output .= '</a>';
+        $userAccessLevel = $_SESSION['user']['access_level'] ?? 1;
+        $output = '<div class="home-tiles">';
+        $output .= "<div class='row'>";
+        foreach ($this->menu as $mainKey => $mainValue) {
+            if ($this->checkLevel($mainValue, $userAccessLevel)) {
+                $text_align = $mainValue['align'] ?? 'left';
+                $backgroundColor = $mainValue['backgroundColor'] ?? '';
+                $color = $mainValue['color'] ?? '';
+                $output .= "<div class='col-lg-4 col-md-6 col-sm-12'>";
+                $output .= "<h5 class='Start {$color} {$backgroundColor}' style='text-align: {$text_align}'>{$mainKey}</h5>";
+                foreach ($mainValue['children'] as $key => $value) {
+                    if ($this->checkLevel($value, $userAccessLevel)) {
+                        if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
+                            $output .= $this->createTile($key, $value, $showInfo);
+                        } else {
+                            $output .= $this->createGrayTile($key, $value, $showInfo);
+                        }
+                    }
+                }
+                $output .= "</div>";
+            }
+        }
+        $output .= "</div>";
+        $output .= "</div>";
+
         return $output;
+    }
+
+    /**
+     * Build the tiles with sidebar
+     *
+     * @param bool $showInfo
+     * @return string
+     */
+    private function buildTilesWithSidebar(bool $showInfo = false): string
+    {
+        return '<p>Not yet implemented!</p>';
+    }
+
+    /**
+     * Check the access level of the user
+     *
+     * @param mixed $value
+     * @param mixed $userAccessLevel
+     * @return bool
+     */
+    private function checkLevel(mixed $value, mixed $userAccessLevel): bool
+    {
+        if (isset($value['level'])) {
+            if (is_array($value['level'])) {
+                $level = in_array($userAccessLevel, $value['level']);
+            } else {
+                $level = $value['level'] == $userAccessLevel;
+            }
+        } else {
+            $level = true;
+        }
+        if (isset($value['levelRange'])) {
+            $levelRange = $value['levelRange'];
+            $level = ($userAccessLevel >= $levelRange[0] && $userAccessLevel <= $levelRange[1]);
+        }
+        return $level;
     }
 }
