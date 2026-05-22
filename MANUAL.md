@@ -297,14 +297,3 @@ Runs on `window.onload`. Walks all sidebar links and matches their `href` agains
 - The section button (`.submenu`'s previous sibling) gets `class="active"`.
 
 Both `.sidebar-left` and `.sidebar-right` are processed.
-
----
-
-## Known Issues / Notes
-
-1. **`buildTilesWithSidebar()` is not implemented** in both `Tiles` and `TilesOnly` — returns `'<p>Not yet implemented!</p>'`.
-2. **`menu.twig` is empty** — the tile HTML output must be passed to a template or echoed directly.
-3. **`Sidebar` methods** (`addSidebarLeft`, `addSidebarRight`, `addSubmenu`, etc.) are `public` but designed as internal helpers; they could be marked `protected` or `private`.
-4. **Duplicate submenu IDs** — `toggleMenu()` uses `document.getElementById(id)`. If two `menu-item` entries have the same title, their sanitized IDs collide. Titles should be unique within a sidebar.
-5. **No PHP 8.5 type hints** on some `Sidebar` parameters (uses `mixed`/untyped).
-6. **Version inconsistency**: `Sidebar.php` declares `PHP 8.4`, while other files declare `8.5`.

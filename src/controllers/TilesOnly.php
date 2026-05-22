@@ -8,7 +8,7 @@ namespace Controller;
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2025-2026 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2026.03.09.0
+ * @version 2026.05.22.0
  * @package Tigress\Menu
  */
 class TilesOnly extends Tiles

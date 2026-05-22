@@ -3,12 +3,12 @@
 namespace Controller;
 
 /**
- * Class Sidebar (PHP version 8.4)
+ * Class Sidebar (PHP version 8.5)
  *
  * @author Rudy Mas <rudy.mas@rudymas.be>
  * @copyright 2024-2025 Rudy Mas (https://rudymas.be)
  * @license https://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
- * @version 2025.10.06.0
+ * @version 2026.05.22.0
  * @package Tigress\Menu
  */
 class Sidebar extends Menu
@@ -46,10 +46,10 @@ class Sidebar extends Menu
     /**
      * Add the left sidebar
      *
-     * @param $menuSidebarValue
+     * @param mixed $menuSidebarValue
      * @return void
      */
-    public function addSidebarLeft($menuSidebarValue): void
+    private function addSidebarLeft(mixed $menuSidebarValue): void
     {
         $this->output .= '<div class="sidebar-left">';
         foreach ($menuSidebarValue as $menuPositionKey => $menuPositionValue) {
@@ -65,10 +65,10 @@ class Sidebar extends Menu
     /**
      * Add the right sidebar
      *
-     * @param $menuSidebarValue
+     * @param mixed $menuSidebarValue
      * @return void
      */
-    public function addSidebarRight($menuSidebarValue): void
+    private function addSidebarRight(mixed $menuSidebarValue): void
     {
         $this->output .= '<div class="sidebar-right">';
         foreach ($menuSidebarValue as $menuPositionKey => $menuPositionValue) {
@@ -84,10 +84,10 @@ class Sidebar extends Menu
     /**
      * Add the top inside the sidebar
      *
-     * @param $menuPositionValue
+     * @param mixed $menuPositionValue
      * @return void
      */
-    public function addSidebarTop($menuPositionValue): void
+    private function addSidebarTop(mixed $menuPositionValue): void
     {
         $this->output .= '<div class="sidebar-top"><ul>';
         $this->addSubmenu($menuPositionValue);
@@ -97,10 +97,10 @@ class Sidebar extends Menu
     /**
      * Add the bottom inside the sidebar
      *
-     * @param $menuPositionValue
+     * @param mixed $menuPositionValue
      * @return void
      */
-    public function addSidebarBottom($menuPositionValue): void
+    private function addSidebarBottom(mixed $menuPositionValue): void
     {
         $this->output .= '<div class="sidebar-bottom"><ul>';
         $this->addSubmenu($menuPositionValue);
@@ -110,10 +110,10 @@ class Sidebar extends Menu
     /**
      * Add the submenu
      *
-     * @param $menuPositionValue
+     * @param mixed $menuPositionValue
      * @return void
      */
-    public function addSubmenu($menuPositionValue): void
+    private function addSubmenu(mixed $menuPositionValue): void
     {
         foreach ($menuPositionValue as $menuItemValue) {
             if (isset($menuItemValue['type'])) {
@@ -138,10 +138,10 @@ class Sidebar extends Menu
     /**
      * Add the menu item
      *
-     * @param $menuItemValue
+     * @param mixed $menuItemValue
      * @return void
      */
-    public function addMenuItem($menuItemValue): void
+    private function addMenuItem(mixed $menuItemValue): void
     {
         // remove spaces and non url characters from $menuItemValue['title']
         $toggleMenu = preg_replace('/[^a-zA-Z0-9]/', '', $menuItemValue['title']);
@@ -163,10 +163,10 @@ class Sidebar extends Menu
     /**
      * Add the back button
      *
-     * @param $menuItemValue
+     * @param mixed $menuItemValue
      * @return void
      */
-    public function addBackButton($menuItemValue): void
+    private function addBackButton(mixed $menuItemValue): void
     {
         $text = $menuItemValue['title'] ?? 'Back';
         $align = $menuItemValue['align'] ?? 'left';
@@ -176,10 +176,10 @@ class Sidebar extends Menu
     /**
      * Add the menu link
      *
-     * @param $menuItemValue
+     * @param mixed $menuItemValue
      * @return void
      */
-    public function addMenuLink($menuItemValue): void
+    private function addMenuLink(mixed $menuItemValue): void
     {
         $this->output .= '<li><span class="menu-link"><a href="' . BASE_URL . $menuItemValue['path'] . '"><i class="' . $menuItemValue['icon'] . '"></i> ' . $menuItemValue['title'] . '</a></span></li>';
     }
@@ -187,10 +187,10 @@ class Sidebar extends Menu
     /**
      * Add the submenu link
      *
-     * @param $childItemValue
+     * @param mixed $childItemValue
      * @return void
      */
-    public function addSubmenuLink($childItemValue): void
+    private function addSubmenuLink(mixed $childItemValue): void
     {
         $this->output .= '<li><a href="' . BASE_URL . $childItemValue['path'] . '"><i class="' . $childItemValue['icon'] . '"></i> ' . $childItemValue['title'] . '</a></li>';
     }
