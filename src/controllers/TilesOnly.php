@@ -14,37 +14,12 @@ namespace Controller;
 class TilesOnly extends Tiles
 {
     /**
-     * Create the tiles
-     *
-     * @param string|array $jsonFileOrArray
-     * @param bool $withSidebar
-     * @param bool $showInfo
-     * @return string
-     */
-    public function createTiles(string|array $jsonFileOrArray, bool $withSidebar = false, bool $showInfo = false): string
-    {
-        if (file_exists(SYSTEM_ROOT . '/src/menus/' . $jsonFileOrArray)) {
-            $this->menu = json_decode(file_get_contents(SYSTEM_ROOT . '/src/menus/' . $jsonFileOrArray), true);
-        } else {
-            $this->menu = json_decode($jsonFileOrArray, true);
-        }
-
-        if ($withSidebar === true) {
-            $output = $this->buildTilesWithSidebar($showInfo);
-        } else {
-            $output = $this->buildTiles($showInfo);
-        }
-
-        return $output;
-    }
-
-    /**
      * Build the tiles
      *
      * @param bool $showInfo
      * @return string
      */
-    private function buildTiles(bool $showInfo = false): string
+    protected function buildTiles(bool $showInfo = false): string
     {
         $output = '<div class="only-tiles">';
         $output .= "<div class='row'>";
@@ -53,7 +28,7 @@ class TilesOnly extends Tiles
             if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
                 $output .= $this->createTile($key, $value, $showInfo);
             } else {
-                $output .= $this->createGrayTile($key, $value, $showInfo);
+                $output .= $this->createGrayTile($key, $value);
             }
         }
         $output .= "</div>";
@@ -66,9 +41,10 @@ class TilesOnly extends Tiles
     /**
      * Build the tiles with sidebar
      *
+     * @param bool $showInfo
      * @return string
      */
-    private function buildTilesWithSidebar(): string
+    protected function buildTilesWithSidebar(bool $showInfo = false): string
     {
         return '<p>Not yet implemented!</p>';
     }

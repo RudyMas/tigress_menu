@@ -85,7 +85,7 @@ class Tiles extends Menu
      * @param bool $showInfo
      * @return string
      */
-    private function buildTiles(bool $showInfo = false): string
+    protected function buildTiles(bool $showInfo = false): string
     {
         $userAccessLevel = $_SESSION['user']['access_level'] ?? 1;
         $output = '<div class="home-tiles">';
@@ -102,7 +102,7 @@ class Tiles extends Menu
                         if (RIGHTS->checkRightsForSpecificPath($value['url'])) {
                             $output .= $this->createTile($key, $value, $showInfo);
                         } else {
-                            $output .= $this->createGrayTile($key, $value, $showInfo);
+                            $output .= $this->createGrayTile($key, $value);
                         }
                     }
                 }
@@ -121,7 +121,7 @@ class Tiles extends Menu
      * @param bool $showInfo
      * @return string
      */
-    private function buildTilesWithSidebar(bool $showInfo = false): string
+    protected function buildTilesWithSidebar(bool $showInfo = false): string
     {
         return '<p>Not yet implemented!</p>';
     }
